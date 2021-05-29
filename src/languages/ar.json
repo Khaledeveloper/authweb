@@ -1,0 +1,19 @@
+{
+ "invalidEmail": "الإيميل غير صحيح", 
+ "emailRequired": "البريد الإلكتروني مطلوب", 
+ "passwordRequired": "الرقم السري مطلوب", 
+ "incorrectEmailOrPass":"البريد الالكتروني او الرقم السري خطأ" , 
+ "errLength30": "الإسم يجب أن يكون بين ٢ إلي ٣٠ حرف", 
+ "nameRequired": " الإسم مطلوب", 
+ "passwordLength": "الرقم السري يجب أن لا يقل عن ٨ حرف" , 
+ "passwordMatch":  "الرقم السري غير مطابق" , 
+ "confirmPasswordRequired": "حقل تأكيد الرقم السري مطلوب ", 
+ "usedEmail": "البريد الإلكتروني مسجل مسبقا" , 
+ "error": "حدث خطأ!" , 
+ "invalidPhone": "رقم الهاتف غير صحيح" , 
+ "phoneRequired":  "رقم الهاتف مطلوب" , 
+ "incorrectPassword":  "الرقم السري غير صحبح" , 
+ "socialAccount":  "هذا الحساب مربوط بايميل تواصل اجتماعي"
+ 
+ 
+} 

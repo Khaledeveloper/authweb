@@ -1,0 +1,19 @@
+{
+ "invalidEmail": "Email is invalid", 
+ "emailRequired": "Email field is required", 
+ "passwordRequired": "Password field is required", 
+ "incorrectEmailOrPass": "The email address or password is incorrect", 
+ "errLength30": "Name must be between 2 and 30 characters", 
+ "nameRequired": "Name field is required", 
+ "passwordLength": "Password must be at least 8 characters", 
+ "passwordMatch": "Passwords must match", 
+ "confirmPasswordRequired": "Confirm Password field is required", 
+ "usedEmail": "Email is already in use", 
+ "error": "Error!", 
+ "invalidPhone": "Phone Number is Invalid", 
+ "phoneRequired": "Phone Number field is required", 
+ "incorrectPassword": "Incorrect Password", 
+ "socialAccount": "it is social account"
+ 
+ 
+}
