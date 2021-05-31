@@ -62,7 +62,8 @@ export default function ButtonAppBar() {
                     </IconButton>
 
                     <Tabs
-                        value={value} onChange={handleChange}
+                        value={value} 
+                        onChange={handleChange}
                         indicatorColor="primary"
                     >
                         <Tab icon={<HomeIcon />}
