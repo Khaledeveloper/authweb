@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Header from './components/ui/Header'
+import RegisterPage from './pages/auth/register'
 import Footer from './components/ui/Footer'
 import React, { useState } from "react";
 import { ThemeProvider } from "@material-ui/styles";
@@ -12,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Header />
       <Switch>
-        
+        <Route path='/register' component={RegisterPage} />
        
       </Switch>
       <Footer />

@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+        paddingBottom: "30px"
     },
     tab: {
         ...theme.typography.tab,
