@@ -2,43 +2,85 @@ import React from 'react'
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import {Grid} from '@material-ui/core';
-import randomColor from 'randomcolor';
- 
+import { Grid } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+
 const useStyles = makeStyles((theme) => ({
-    form: {
-        margin: "0 auto",
-        
-    }
+
+
+  form: {
+
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: '25ch',
+     
+      '& fieldset': {
+        borderColor: 'gray',
+      },
+      '&:hover fieldset': {
+        //borderColor: 'yellow',
+      },
+
+
+
+    },
+
+
+  },
+
+  formTitle :{
+    margin: '0 auto'
+  }
+
+  
+
 }));
 const Register = (props) => {
-    const classes = useStyles();
-    return(
+  const classes = useStyles();
+  return (
     <Grid
-  container
-  spacing={0}
-  direction="column"
-  alignItems="center"
-  justify="center"
-  style={{ minHeight: '100vh' }}
->
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justify="center"
 
-  <Grid item xs={3} style={{background:randomColor()}}>
-    <form  noValidate autoComplete="off">
-        <TextField id="outlined-basic" 
-        label="Outlined"
-         variant="outlined" />
-        </form>
-  </Grid>   
+    >
 
-</Grid> 
-    
-    
-       
-        
-        
-    
-    )
+
+      <form className={classes.form}>
+
+        <h3 className={classes.formTitle}>Register</h3>
+        <TextField id="outlined-basic"
+          label="Email"
+          variant="outlined" />
+        <TextField id="outlined-basic"
+          label="Email"
+          variant="outlined" />
+        <TextField id="outlined-basic"
+          label="Email"
+          variant="outlined" />
+
+
+        <Button variant="contained" color="primary">
+          Register
+          </Button>
+
+
+      </form>
+
+
+    </Grid>
+
+
+
+
+
+
+  )
 }
 
 export default Register

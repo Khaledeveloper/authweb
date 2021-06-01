@@ -54,51 +54,51 @@ export default function ButtonAppBar() {
         } else if (window.location.pathname === '/cart') {
             setValue(2)
         }
-        
-        if (window.location.pathname === '/account/settings') {
-        	setSelectedIndex(0)
+
+        if (window.location.pathname === '/register') {
+            setSelectedIndex(0)
             setValue(1)
         } else if (window.location.pathname === '/account/profile') {
-        	setSelectedIndex(1)
+            setSelectedIndex(1)
             setValue(1)
         }
 
     }, [value])
 
 
-//change tabs position 
+    //change tabs position 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    
+
 
     const handleOpenMenu = e => {
-    setAnchorEl(e.currentTarget); //position of clicked item
-    setOpenMenu(true);
-  };
-  
-  const handleCloseMenu = e => {
-    setAnchorEl(null);
-    setOpenMenu(false);
-  };
-  
-  const handleMenuItemClick = (e, i) => {
-    setAnchorEl(null);
-    setOpenMenu(false);
-    setSelectedIndex(i);
-  };
-  
-  const menuOptions = [
-{
-	link: '/account/settings', 
-	name : 'account settings' 
-	
-}, 
-{
-	link: '/account/profile', 
-	name : 'profile page' 
-} 
-] 
+        setAnchorEl(e.currentTarget); //position of clicked item
+        setOpenMenu(true);
+    };
+
+    const handleCloseMenu = e => {
+        setAnchorEl(null);
+        setOpenMenu(false);
+    };
+
+    const handleMenuItemClick = (e, i) => {
+        setAnchorEl(null);
+        setOpenMenu(false);
+        setSelectedIndex(i);
+    };
+
+    const menuOptions = [
+        {
+            link: '/register',
+            name: 'register'
+
+        },
+        {
+            link: '/account/profile',
+            name: 'profile page'
+        }
+    ]
 
     return (
         <div className={classes.root}>
@@ -116,55 +116,55 @@ export default function ButtonAppBar() {
                         <Tab icon={<HomeIcon />}
                             classes={classes.tab}
                             component={Link}
-                           
+
                             to='/'
                         />
                         <Tab
                             icon={<AccountCircleIcon />}
                             classes={classes.tab}
                             component={Link}
-                            ariaOwns: anchorEl ? "account-toolbar-menu" : undefined,
-      ariaPopup: anchorEl ? "true" : undefined,
-                            onMouseOver: {event => handleMenuClick(event)} 
+                            ariaOwns= {anchorEl ? "account-toolbar-menu" : undefined}
+                            ariaPopup= {anchorEl ? "true" : undefined}
+                            onMouseOver= {event => handleOpenMenu(event)}
                         />
-                        <Tab icon={<CartIcon />}
+                        <Tab icon={<CartIcon />} 
                             classes={classes.tab}
                             component={Link}
                             to='/cart'
                         />
                     </Tabs>
-                    
+
                     <Menu
-        id="account-toolbar-menu"
-        anchorEl={anchorEl}
-        open={openMenu}
-        onClose={handleClose}
-        classes={{ paper: classes.menu }}
-       MenuListProps={{
-          onMouseLeave: handleClose
-     }}
-        elevation={0}
-        style={{ zIndex: 1302 }}
-        keepMounted
-      >
-        {menuOptions.map((option, i) => (
-          <MenuItem
-            key={`${option}${i}`}
-            component={Link}
-            to={option.link}
-            classes={{ root: classes.menuItem }}
-            onClick={event => {
-            handleMenuItemClick(event, i) 
-              handleMenuClose();
-              setValue(1);
-            }}
-            selected={i === selectedIndex && value === 1}
-          >
-            {option.name}
-          </MenuItem>
-        ))}
-      </Menu>
-      
+                        id="account-toolbar-menu"
+                        anchorEl={anchorEl}
+                        open={openMenu}
+                        onClose={handleCloseMenu}
+                        classes={{ paper: classes.menu }}
+                        MenuListProps={{
+                            onMouseLeave: handleCloseMenu
+                        }}
+                        elevation={0}
+                        style={{ zIndex: 1302 }}
+                        keepMounted
+                    >
+                        {menuOptions.map((option, i) => (
+                            <MenuItem
+                                key={`${option}${i}`}
+                                component={Link}
+                                to={option.link}
+                                classes={{ root: classes.menuItem }}
+                                onClick={event => {
+                                    handleMenuItemClick(event, i)
+                                    handleCloseMenu();
+                                    setValue(1);
+                                }}
+                                selected={i === selectedIndex && value === 1}
+                            >
+                                {option.name}
+                            </MenuItem>
+                        ))}
+                    </Menu>
+
                 </Toolbar>
             </AppBar>
         </div>
