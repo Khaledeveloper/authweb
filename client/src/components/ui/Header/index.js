@@ -14,6 +14,9 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab'
 
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+
 import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
@@ -38,6 +41,11 @@ export default function ButtonAppBar() {
 
     const classes = useStyles();
     const [value, setValue] = useState(0);
+    const [anchorEl, setAnchorEl] = useState(null); //position of the menu 
+    const [openMenu, setOpenMenu] = useState(false); //for menu 
+    const [selectedIndex, setSelectedIndex] = useState(0); //for menu 
+
+
 
     useEffect(() => {
 
@@ -46,12 +54,51 @@ export default function ButtonAppBar() {
         } else if (window.location.pathname === '/cart') {
             setValue(2)
         }
+        
+        if (window.location.pathname === '/account/settings') {
+        	setSelectedIndex(0)
+            setValue(1)
+        } else if (window.location.pathname === '/account/profile') {
+        	setSelectedIndex(1)
+            setValue(1)
+        }
 
     }, [value])
 
+
+//change tabs position 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+    
+
+    const handleOpenMenu = e => {
+    setAnchorEl(e.currentTarget); //position of clicked item
+    setOpenMenu(true);
+  };
+  
+  const handleCloseMenu = e => {
+    setAnchorEl(null);
+    setOpenMenu(false);
+  };
+  
+  const handleMenuItemClick = (e, i) => {
+    setAnchorEl(null);
+    setOpenMenu(false);
+    setSelectedIndex(i);
+  };
+  
+  const menuOptions = [
+{
+	link: '/account/settings', 
+	name : 'account settings' 
+	
+}, 
+{
+	link: '/account/profile', 
+	name : 'profile page' 
+} 
+] 
 
     return (
         <div className={classes.root}>
@@ -62,20 +109,23 @@ export default function ButtonAppBar() {
                     </IconButton>
 
                     <Tabs
-                        value={value} 
+                        value={value} //store the value index for saving state 
                         onChange={handleChange}
                         indicatorColor="primary"
                     >
                         <Tab icon={<HomeIcon />}
                             classes={classes.tab}
                             component={Link}
+                           
                             to='/'
                         />
                         <Tab
                             icon={<AccountCircleIcon />}
                             classes={classes.tab}
                             component={Link}
-                            to='/account'
+                            ariaOwns: anchorEl ? "account-toolbar-menu" : undefined,
+      ariaPopup: anchorEl ? "true" : undefined,
+                            onMouseOver: {event => handleMenuClick(event)} 
                         />
                         <Tab icon={<CartIcon />}
                             classes={classes.tab}
@@ -83,6 +133,38 @@ export default function ButtonAppBar() {
                             to='/cart'
                         />
                     </Tabs>
+                    
+                    <Menu
+        id="account-toolbar-menu"
+        anchorEl={anchorEl}
+        open={openMenu}
+        onClose={handleClose}
+        classes={{ paper: classes.menu }}
+       MenuListProps={{
+          onMouseLeave: handleClose
+     }}
+        elevation={0}
+        style={{ zIndex: 1302 }}
+        keepMounted
+      >
+        {menuOptions.map((option, i) => (
+          <MenuItem
+            key={`${option}${i}`}
+            component={Link}
+            to={option.link}
+            classes={{ root: classes.menuItem }}
+            onClick={event => {
+            handleMenuItemClick(event, i) 
+              handleMenuClose();
+              setValue(1);
+            }}
+            selected={i === selectedIndex && value === 1}
+          >
+            {option.name}
+          </MenuItem>
+        ))}
+      </Menu>
+      
                 </Toolbar>
             </AppBar>
         </div>
