@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 
+
 const useStyles = makeStyles((theme) => ({
 
 
@@ -38,7 +39,17 @@ const useStyles = makeStyles((theme) => ({
   
 
 }));
+
+
+
 const Register = (props) => {
+
+   const handleSubmit =(event) =>{
+     event.preventDefault()
+   console.log("event" +event);
+   }
+
+
   const classes = useStyles();
   return (
     <Grid
@@ -51,7 +62,7 @@ const Register = (props) => {
     >
 
 
-      <form className={classes.form}>
+      <form onSubmit={handleSubmit} className={classes.form}>
 
         <h3 className={classes.formTitle}>Register</h3>
         <TextField id="outlined-basic"
@@ -65,7 +76,7 @@ const Register = (props) => {
           variant="outlined" />
 
 
-        <Button variant="contained" color="primary">
+        <Button type="submit" variant="contained" color="primary">
           Register
           </Button>
 
