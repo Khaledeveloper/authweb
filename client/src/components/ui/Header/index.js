@@ -22,31 +22,48 @@ import { useTheme } from "@material-ui/core/styles";
 
 import { Link } from 'react-router-dom'
 
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+
+
+
+function ElevationScroll(props) {
+    const { children } = props;
+
+    const trigger = useScrollTrigger({
+        disableHysteresis: true,
+        threshold: 0
+    });
+
+    return React.cloneElement(children, {
+        elevation: trigger ? 4 : 0
+    });
+}
+
 const useStyles = makeStyles((theme) => ({
-	
-	toolbarMargin: {
-    ...theme.mixins.toolbar,
-    marginBottom: "3em",
-    [theme.breakpoints.down("md")]: {
-      marginBottom: "2em"
+
+    toolbarMargin: {
+        ...theme.mixins.toolbar,
+        marginBottom: "3em",
+        [theme.breakpoints.down("md")]: {
+            marginBottom: "2em"
+        },
+        [theme.breakpoints.down("xs")]: {
+            marginBottom: "1.25em"
+        }
     },
-    [theme.breakpoints.down("xs")]: {
-      marginBottom: "1.25em"
-    }
-  },
-  logo: {
-    height: "8em",
-    [theme.breakpoints.down("md")]: {
-      height: "7em"
+    logo: {
+        height: "8em",
+        [theme.breakpoints.down("md")]: {
+            height: "7em"
+        },
+        [theme.breakpoints.down("xs")]: {
+            height: "5.5em"
+        }
     },
-    [theme.breakpoints.down("xs")]: {
-      height: "5.5em"
-    }
-  },
     root: {
         flexGrow: 1,
-        paddingBottom: "30px"
+
     },
     tab: {
         ...theme.typography.tab,
@@ -65,8 +82,8 @@ export default function ButtonAppBar() {
 
     const classes = useStyles();
     const theme = useTheme();
-  //true if Md or below 
-  const matches = useMediaQuery(theme.breakpoints.down("md"));
+    //true if Md or below 
+    const matches = useMediaQuery(theme.breakpoints.down("xd"));
 
     const [value, setValue] = useState(0);
     const [anchorEl, setAnchorEl] = useState(null); //position of the menu 
@@ -127,84 +144,84 @@ export default function ButtonAppBar() {
             name: 'profile page'
         }
     ]
-    
-    
+
+
     const tabs = (
-    <React.Fragment>
-      <Tabs
-                        value={value} //store the value index for saving state 
-                        onChange={handleChange}
-                        indicatorColor="primary"
-                    >
-                        <Tab icon={<HomeIcon />}
-                            classes={classes.tab}
-                            component={Link}
+        <React.Fragment>
+            <Tabs
+                value={value} //store the value index for saving state 
+                onChange={handleChange}
+                indicatorColor="primary"
+            >
+                <Tab icon={<HomeIcon />}
+                    classes={classes.tab}
+                    component={Link}
 
-                            to='/'
-                        />
-                        <Tab
-                            icon={<AccountCircleIcon />}
-                            classes={classes.tab}
-                            component={Link}
-                            ariaOwns= {anchorEl ? "account-toolbar-menu" : undefined}
-                            ariaPopup= {anchorEl ? "true" : undefined}
-                            onMouseOver= {event => handleOpenMenu(event)}
-                        />
-                        <Tab icon={<CartIcon />} 
-                            classes={classes.tab}
-                            component={Link}
-                            to='/cart'
-                        />
-                    </Tabs>
+                    to='/'
+                />
+                <Tab
+                    icon={<AccountCircleIcon />}
+                    classes={classes.tab}
+                    component={Link}
+                    ariaOwns={anchorEl ? "account-toolbar-menu" : undefined}
+                    ariaPopup={anchorEl ? "true" : undefined}
+                    onMouseOver={event => handleOpenMenu(event)}
+                />
+                <Tab icon={<CartIcon />}
+                    classes={classes.tab}
+                    component={Link}
+                    to='/cart'
+                />
+            </Tabs>
 
-                    <Menu
-                        id="account-toolbar-menu"
-                        anchorEl={anchorEl}
-                        open={openMenu}
-                        onClose={handleCloseMenu}
-                        classes={{ paper: classes.menu }}
-                        MenuListProps={{
-                            onMouseLeave: handleCloseMenu
+            <Menu
+                id="account-toolbar-menu"
+                anchorEl={anchorEl}
+                open={openMenu}
+                onClose={handleCloseMenu}
+                classes={{ paper: classes.menu }}
+                MenuListProps={{
+                    onMouseLeave: handleCloseMenu
+                }}
+                elevation={0}
+                style={{ zIndex: 1302 }}
+                keepMounted
+            >
+                {menuOptions.map((option, i) => (
+                    <MenuItem
+                        key={`${option}${i}`}
+                        component={Link}
+                        to={option.link}
+                        classes={{ root: classes.menuItem }}
+                        onClick={event => {
+                            handleMenuItemClick(event, i)
+                            handleCloseMenu();
+                            setValue(1);
                         }}
-                        elevation={0}
-                        style={{ zIndex: 1302 }}
-                        keepMounted
+                        selected={i === selectedIndex && value === 1}
                     >
-                        {menuOptions.map((option, i) => (
-                            <MenuItem
-                                key={`${option}${i}`}
-                                component={Link}
-                                to={option.link}
-                                classes={{ root: classes.menuItem }}
-                                onClick={event => {
-                                    handleMenuItemClick(event, i)
-                                    handleCloseMenu();
-                                    setValue(1);
-                                }}
-                                selected={i === selectedIndex && value === 1}
-                            >
-                                {option.name}
-                            </MenuItem>
-                        ))}
-                    </Menu>
-    </React.Fragment>
-  );
+                        {option.name}
+                    </MenuItem>
+                ))}
+            </Menu>
+        </React.Fragment>
+    );
 
     return (
         <React.Fragment>
-      <ElevationScroll>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
+            {/* <ElevationScroll> */}
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                            <MenuIcon />
+                        </IconButton>
 
-                    
-{matches ? null : tabs}
-                </Toolbar>
-            </AppBar>
-        </ElevationScroll>
-      <div className={classes.toolbarMargin} />
-    </React.Fragment>
+
+                        {matches ? null : tabs}
+                    </Toolbar>
+                </AppBar>
+            {/* </ElevationScroll> */}
+
+        </React.Fragment>
     );
 }

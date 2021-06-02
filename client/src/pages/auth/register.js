@@ -5,6 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 
+import Paper from '@material-ui/core/Paper'
+
 
 const useStyles = makeStyles((theme) => ({
 
@@ -34,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
 
   formTitle :{
     margin: '0 auto'
+  },
+  Paper: {
+    padding: '40px'
   }
 
   
@@ -61,7 +66,7 @@ const Register = (props) => {
 
     >
 
-
+<Paper elevation={3} className={classes.Paper}>
       <form onSubmit={handleSubmit} className={classes.form}>
 
         <h3 className={classes.formTitle}>Register</h3>
@@ -82,7 +87,7 @@ const Register = (props) => {
 
 
       </form>
-
+</Paper>
 
     </Grid>
 

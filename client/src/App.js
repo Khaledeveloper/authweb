@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/ui/Header'
 import RegisterPage from './pages/auth/register'
+import Home from './pages/home'
 import Footer from './components/ui/Footer'
 import React, { useState } from "react";
 import { ThemeProvider } from "@material-ui/styles";
@@ -10,15 +11,16 @@ import theme from "./components/ui/Theme";
 function App() {
   return (
     <ThemeProvider theme={theme}>
-    <BrowserRouter>
-      <Header />
-      <Switch>
-        <Route path='/register' component={RegisterPage} />
-       
-      </Switch>
-      <Footer />
-     </BrowserRouter> 
-  </ThemeProvider>
+      <BrowserRouter>
+        <Header />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/register' component={RegisterPage} />
+
+        </Switch>
+        <Footer />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
