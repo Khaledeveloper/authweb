@@ -17,9 +17,33 @@ import Tab from '@material-ui/core/Tab'
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
+
 import { Link } from 'react-router-dom'
 
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 const useStyles = makeStyles((theme) => ({
+	
+	toolbarMargin: {
+    ...theme.mixins.toolbar,
+    marginBottom: "3em",
+    [theme.breakpoints.down("md")]: {
+      marginBottom: "2em"
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: "1.25em"
+    }
+  },
+  logo: {
+    height: "8em",
+    [theme.breakpoints.down("md")]: {
+      height: "7em"
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "5.5em"
+    }
+  },
     root: {
         flexGrow: 1,
         paddingBottom: "30px"
@@ -40,6 +64,10 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar() {
 
     const classes = useStyles();
+    const theme = useTheme();
+  //true if Md or below 
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
+
     const [value, setValue] = useState(0);
     const [anchorEl, setAnchorEl] = useState(null); //position of the menu 
     const [openMenu, setOpenMenu] = useState(false); //for menu 
@@ -99,16 +127,11 @@ export default function ButtonAppBar() {
             name: 'profile page'
         }
     ]
-
-    return (
-        <div className={classes.root}>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
-
-                    <Tabs
+    
+    
+    const tabs = (
+    <React.Fragment>
+      <Tabs
                         value={value} //store the value index for saving state 
                         onChange={handleChange}
                         indicatorColor="primary"
@@ -164,9 +187,24 @@ export default function ButtonAppBar() {
                             </MenuItem>
                         ))}
                     </Menu>
+    </React.Fragment>
+  );
 
+    return (
+        <React.Fragment>
+      <ElevationScroll>
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                        <MenuIcon />
+                    </IconButton>
+
+                    
+{matches ? null : tabs}
                 </Toolbar>
             </AppBar>
-        </div>
+        </ElevationScroll>
+      <div className={classes.toolbarMargin} />
+    </React.Fragment>
     );
 }
