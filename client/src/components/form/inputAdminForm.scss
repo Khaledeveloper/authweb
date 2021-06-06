@@ -1,0 +1,49 @@
+
+.form-group-admin{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    }
+.label-input-admin{
+    display: flex;
+}
+
+.inputText-admin{
+    display: flex;
+}
+
+
+
+.input-select-admin{
+
+	
+	margin-left: 5px;
+	transition: width 1s;
+	
+	/*margin-bottom: 1px;*/
+	border: 1px solid rgba(81, 203, 238, 1);
+	border-radius: 2px;
+	padding: 5px;
+	
+	text-align: left;
+}
+
+.inputText-admin{
+	font-size: 12pt;
+	max-width: 70%;
+	/*margin-right: 5px;*/
+	transition: width 1s;
+	height: 20px;
+	/*margin-bottom: 1px;*/
+	border: 1px solid rgba(81, 203, 238, 1);
+	border-radius: 2px;
+	padding: 5px;
+	
+	text-align: left;
+}
+
+.inputText-admin:focus {
+	box-shadow: 0 0 5px #00ccff;
+	border: 1px solid #0066cc;
+}

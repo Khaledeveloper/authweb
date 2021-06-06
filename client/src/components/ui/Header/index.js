@@ -210,7 +210,7 @@ export default function ButtonAppBar() {
     return (
         <React.Fragment>
             {/* <ElevationScroll> */}
-                <AppBar position="static">
+                <AppBar position="fixed">
                     <Toolbar>
                         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                             <MenuIcon />
@@ -221,7 +221,7 @@ export default function ButtonAppBar() {
                     </Toolbar>
                 </AppBar>
             {/* </ElevationScroll> */}
-
+<div className={classes.toolbarMargin} />
         </React.Fragment>
     );
 }
