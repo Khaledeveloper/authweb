@@ -74,7 +74,7 @@ const  onSubmit =  (formData) => {
 
       <div class="main-container-auth">
         <Form
-          title={props.signin_title}
+          title={"Login"}
           fieldsets={fieldsets}
           classN="juv-input-form-set"
           labelClass="input-label"
@@ -108,14 +108,14 @@ const mapStateToProps = state => {
     name: state.userAuth.authUser.name,
     token: state.userAuth.authUser.token,
     isAuthenticated: state.userAuth.authUser.isAuthenticated,
-    submit_signin_btn: selectTermsLang(state).submit_signin_btn,
-    signin_title: selectTermsLang(state).signin_title,
-    emailString: selectTermsLang(state).email,
-    passwordString: selectTermsLang(state).password,
-    classN: selectTermsLang(state).classN,
-    ToSignUp: selectTermsLang(state).ToSignUp,
-    cartItems: selectCartItems(state),
-    signup_title: selectTermsLang(state).signup_title
+    // submit_signin_btn: selectTermsLang(state).submit_signin_btn,
+    // signin_title: selectTermsLang(state).signin_title,
+    // emailString: selectTermsLang(state).email,
+    // passwordString: selectTermsLang(state).password,
+    // classN: selectTermsLang(state).classN,
+    // ToSignUp: selectTermsLang(state).ToSignUp,
+    // cartItems: selectCartItems(state),
+    // signup_title: selectTermsLang(state).signup_title
   }
 
 }
@@ -123,7 +123,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
 
-    chechoutRedirectDone: () => dispatch(actions.chechoutRedirectDone()),
+    //chechoutRedirectDone: () => dispatch(actions.chechoutRedirectDone()),
     signInAuth: (data, action, cartItems) => dispatch(actions.auth(data, action, cartItems)),
     authLeft: () => dispatch(actions.authLeft())
     //  onSetAuthRedirectPath: () => dispatch( actions.setAuthRedirectPath( '/' ) )
@@ -133,4 +133,4 @@ const mapDispatchToProps = dispatch => {
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   reduxForm({ form: 'signin' })
-)(signIn)
+)(SignIn)

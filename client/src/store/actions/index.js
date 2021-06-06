@@ -9,7 +9,7 @@ export {
     logout, 
     updateLeft, 
     authLeft,
-    authCheck, 
+    // authCheck, 
     refreshToken
     
 } from './user';

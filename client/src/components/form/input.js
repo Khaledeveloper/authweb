@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Menuitem, TextField} from '@material-ui/core';
+import { Grid, MenuItem, TextField} from '@material-ui/core';
 
 const CustomInput = (props) =>{
   

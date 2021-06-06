@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/ui/Header'
 import RegisterPage from './pages/auth/register'
 import Home from './pages/home'
+import Login from './components/forms/signIn'
 import Footer from './components/ui/Footer'
 import React, { useState } from "react";
 import { ThemeProvider } from "@material-ui/styles";
@@ -16,6 +17,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/register' component={RegisterPage} />
+          <Route path='/login' component={Login} />
 
         </Switch>
         <Footer />
